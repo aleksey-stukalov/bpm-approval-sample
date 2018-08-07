@@ -1,0 +1,32 @@
+/* Define your theme modifications inside next mixin */
+@mixin com_company_appr-halo-ext {
+
+  .v-table-row-cs {
+    &.approval-approval {
+      background-color: #d8f8ff;
+    }
+    &.approval-approved {
+      background-color: #daffdb;
+    }
+    &.approval-correction {
+      background-color: #fff0e0;
+    }
+  }
+
+  .approvals-panel {
+    color: #a5a5a5;
+
+    .header {
+      font-size: 14px;
+    }
+    .c-groupbox-caption {
+      color: #a5a5a5;
+    }
+
+    .c-groupbox-caption-start-deco div,
+    .c-groupbox-caption-end-deco div,
+    .c-groupbox-content {
+      border-color: #666;
+    }
+  }
+}

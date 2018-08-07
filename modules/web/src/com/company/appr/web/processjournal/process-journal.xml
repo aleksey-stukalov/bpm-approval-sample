@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://caption"
+        class="com.company.appr.web.processjournal.ProcessJournal"
+        focusComponent="procTasksTable"
+        messagesPack="com.company.appr.web.processjournal">
+    <dsContext>
+        <collectionDatasource id="procTasksDs"
+                              class="com.haulmont.bpm.entity.ProcTask"
+                              view="procTask-frame">
+            <query>
+                <![CDATA[select e from bpm$ProcTask e
+                where e.procInstance.id = :custom$procInstance
+                order by e.createTs desc]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"
+                resizable="true"/>
+    <layout expand="procTasksTable"
+            spacing="true">
+        <table id="procTasksTable"
+               width="100%">
+            <columns>
+                <!--<column id="locName" caption="msg://com.haulmont.bpm.entity/ProcTask.name"/>-->
+                <column id="procActor.user.name" caption="msg://user"/>
+                <!--<column id="startDate"/>-->
+                <column id="startDate"/>
+                <column id="endDate"/>
+                <column id="locOutcome" caption="msg://com.haulmont.bpm.entity/ProcTask.outcome"/>
+                <column id="comment" maxTextLength="50"/>
+            </columns>
+            <rows datasource="procTasksDs"/>
+        </table>
+    </layout>
+</window>

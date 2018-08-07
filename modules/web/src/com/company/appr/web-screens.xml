@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
+    <screen id="appr$Document.edit"
+            template="com/company/appr/web/document/document-edit.xml"/>
+    <screen id="appr$Approval.browse"
+            template="com/company/appr/web/approval/approval-browse.xml"/>
+    <screen id="appr$Approval.edit"
+            template="com/company/appr/web/approval/approval-edit.xml"/>
+    <screen id="approver-user.lookup"
+            template="com/company/appr/web/user/approver-user-lookup.xml"/>
+    <screen id="process-journal"
+            template="com/company/appr/web/processjournal/process-journal.xml"/>
+    <screen id="mainWindow"
+            template="com/company/appr/web/screens/ext-mainwindow.xml"/>
+</screen-config>

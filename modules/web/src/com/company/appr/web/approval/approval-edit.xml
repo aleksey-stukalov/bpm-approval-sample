@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.company.appr.web.approval.ApprovalEdit"
+        datasource="approvalDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.appr.web.approval">
+    <dsContext>
+        <datasource id="approvalDs"
+                    class="com.company.appr.entity.Approval"
+                    view="approval-edit">
+            <collectionDatasource id="documentsDs"
+                                  property="documents"/>
+            <collectionDatasource id="approversDs"
+                                  property="approvers"/>
+        </datasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="collectionsBox"
+            spacing="true">
+        <hbox spacing="true">
+            <fieldGroup id="fieldGroup"
+                        datasource="approvalDs">
+                <column width="250px">
+                    <field property="name"/>
+                    <field property="type"/>
+                    <field property="dueDate"/>
+                    <field property="processState" editable="false"/>
+                    <field property="initiator" editable="false"/>
+                </column>
+            </fieldGroup>
+            <groupBox id="procActionsBox" caption="msg://processActions" height="100%" width="300px">
+                <frame id="procActionsFrame" screen="procActionsFrame" height="100%" width="100%"/>
+            </groupBox>
+        </hbox>
+        <hbox id="collectionsBox"
+              spacing="true"
+              width="100%">
+            <groupBox id="documentsBox"
+                      caption="msg://com.company.appr.entity/Approval.documents"
+                      height="100%">
+                <table id="documentsTable"
+                       height="100%"
+                       width="100%">
+                    <actions>
+                        <action id="create" openType="DIALOG"/>
+                        <action id="edit" openType="DIALOG"/>
+                        <action id="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="name"/>
+                        <column id="description" maxTextLength="70"/>
+                    </columns>
+                    <rows datasource="documentsDs"/>
+                    <buttonsPanel>
+                        <button action="documentsTable.create"/>
+                        <button action="documentsTable.edit"/>
+                        <button action="documentsTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+            <groupBox id="approversBox"
+                      caption="msg://com.company.appr.entity/Approval.approvers"
+                      height="100%">
+                <table id="approversTable"
+                       height="100%"
+                       width="100%">
+                    <actions>
+                        <action id="add" openType="DIALOG"/>
+                        <action id="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="name"/>
+                    </columns>
+                    <rows datasource="approversDs"/>
+                    <buttonsPanel>
+                        <button action="approversTable.add"/>
+                        <button action="approversTable.remove"/>
+                        <linkButton id="displayProcessJournalBtn" caption="msg://viewProcessJournal" invoke="displayProcessJournal" align="MIDDLE_LEFT"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+        </hbox>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

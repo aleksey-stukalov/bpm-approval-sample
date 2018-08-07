@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.appr.web.approval.ApprovalBrowse"
+        focusComponent="approvalsTable"
+        lookupComponent="approvalsTable"
+        messagesPack="com.company.appr.web.approval">
+    <dsContext>
+        <groupDatasource id="approvalsDs"
+                         class="com.company.appr.entity.Approval"
+                         view="approval-browse">
+            <query>
+                <![CDATA[select e from appr$Approval e left join e.approvers appr
+                where e.initiator.id = :session$userId or appr.id = :session$userId]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="approvalsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="approvalsTable"
+                datasource="approvalsDs">
+            <properties include=".*"/>
+            <custom name="requiresProcessAction" caption="msg://requiresProcessAction" join="join bpm$ProcInstance pi on pi.entity.entityId = {E}.id join pi.procTasks pt">
+                <![CDATA[pt.procActor.user.id = :session$userId and pt.endDate is null]]>
+            </custom>
+        </filter>
+        <groupTable id="approvalsTable"
+                    multiselect="true"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+                <action id="refresh"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="type"/>
+                <column id="dueDate"/>
+                <column id="initiator"/>
+                <column id="processState"/>
+            </columns>
+            <rows datasource="approvalsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="approvalsTable.create"/>
+                <button id="editBtn"
+                        action="approvalsTable.edit"/>
+                <button id="removeBtn"
+                        action="approvalsTable.remove"/>
+                <button id="refreshBtn"
+                        action="approvalsTable.refresh"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="mainMsg://application.caption"
+        class="com.company.appr.web.screens.ExtAppMainWindow"
+        messagesPack="com.company.appr.web.screens"
+        xmlns:main="http://schemas.haulmont.com/cuba/mainwindow.xsd">
+    <layout expand="horizontalWrap">
+        <hbox id="horizontalWrap"
+              expand="workArea"
+              stylename="c-sidemenu-layout"
+              width="100%">
+            <vbox id="sideMenuPanel"
+                  expand="spring"
+                  height="100%"
+                  margin="false,false,true,false"
+                  spacing="true"
+                  stylename="c-sidemenu-panel"
+                  width="250px">
+                <hbox id="appTitleBox"
+                      spacing="true"
+                      stylename="c-sidemenu-title"
+                      width="100%">
+                    <label id="appTitleLabel"
+                           align="MIDDLE_CENTER"
+                           value="mainMsg://application.logoLabel"/>
+                </hbox>
+                <embedded id="logoImage"
+                          align="MIDDLE_CENTER"
+                          stylename="c-app-icon"
+                          type="IMAGE"/>
+                <hbox id="userInfoBox"
+                      align="MIDDLE_CENTER"
+                      expand="userIndicator"
+                      margin="true"
+                      spacing="true"
+                      width="100%">
+                    <main:userIndicator id="userIndicator"
+                                        align="MIDDLE_CENTER"/>
+                    <main:newWindowButton id="newWindowButton"
+                                          description="mainMsg://newWindowBtnDescription"
+                                          icon="app/images/new-window.png"/>
+                    <main:logoutButton id="logoutButton"
+                                       description="mainMsg://logoutBtnDescription"
+                                       icon="app/images/exit.png"/>
+                </hbox>
+                <main:timeZoneIndicator id="timeZoneIndicator"
+                                        align="MIDDLE_CENTER"/>
+                <groupBox id="approvalBox"
+                          outerMargin="false;true;false;true"
+                          stylename="approvals-panel"
+                          width="100%"
+                          align="MIDDLE_CENTER"
+                          spacing="true">
+                    <hbox spacing="true" width="100%" expand="approvalsPanelHeader">
+                        <label id="approvalsPanelHeader" value="msg://approvals" stylename="header" align="MIDDLE_LEFT"/>
+                        <button icon="PLUS" invoke="createApproval" stylename="c-newwindow-button" description="msg://createApproval"/>
+                        <button icon="REFRESH" invoke="refreshApprovalsCountLabels" stylename="c-newwindow-button" description="msg://refreshApprovalsCount"/>
+                    </hbox>
+                    <grid spacing="true" width="100%">
+                        <columns count="3"/>
+                        <rows>
+                            <row>
+                                <label value="msg://requireAction"/>
+                                <label id="requireActionCountLabel" stylename="bold"/>
+                                <linkButton id="openRequireActionApprovalsBtn" invoke="openRequireActionApprovals" caption="Open list"/>
+                            </row>
+                            <row>
+                                <label value="msg://allApprovals"/>
+                                <label id="allApprovalsCountLabel" stylename="bold"/>
+                                <linkButton id="openAllApprovalsBtn" invoke="openAllApprovals" caption="Open list"/>
+                            </row>
+                        </rows>
+                    </grid>
+                </groupBox>
+                <main:sideMenu id="sideMenu"
+                               width="100%"/>
+                <main:ftsField id="ftsField"
+                               width="100%"/>
+                <vbox id="spring"/>
+            </vbox>
+            <main:workArea id="workArea"
+                           height="100%">
+                <main:initialLayout margin="true"
+                                    spacing="true">
+                    <label id="welcomeLabel"
+                           align="MIDDLE_CENTER"
+                           stylename="c-welcome-text"
+                           value="mainMsg://application.welcomeText"/>
+                </main:initialLayout>
+            </main:workArea>
+        </hbox>
+    </layout>
+</window>

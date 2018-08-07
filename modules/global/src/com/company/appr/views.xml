@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+    <view class="com.company.appr.entity.Approval"
+          extends="_local"
+          name="approval-edit">
+        <property name="initiator"
+                  view="_minimal"/>
+        <property name="approvers"
+                  view="_minimal"/>
+        <property name="documents"
+                  view="_minimal">
+            <property name="description"/>
+        </property>
+    </view>
+    <view class="com.haulmont.bpm.entity.ProcInstance"
+          extends="_minimal"
+          name="procInstance-send-email">
+        <property name="entityName"/>
+        <property name="entity"
+                  view="_local"/>
+        <property name="startDate"/>
+        <property name="procActors">
+            <property name="user"
+                      view="_minimal">
+                <property name="email"/>
+            </property>
+            <property name="procRole">
+                <property name="name"/>
+                <property name="code"/>
+            </property>
+        </property>
+    </view>
+    <view entity="appr$Approval" name="approval-browse" extends="_local">
+        <property name="initiator" view="_minimal"/>
+    </view>
+</views>
