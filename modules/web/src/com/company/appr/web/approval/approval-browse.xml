@@ -22,10 +22,10 @@
         <filter id="filter"
                 applyTo="approvalsTable"
                 datasource="approvalsDs">
+            <custom caption="msg://requiresProcessAction"
+                    join="join bpm$ProcInstance pi on pi.entity.entityId = {E}.id join pi.procTasks pt"
+                    name="requiresProcessAction">pt.procActor.user.id = :session$userId and pt.endDate is null</custom>
             <properties include=".*"/>
-            <custom name="requiresProcessAction" caption="msg://requiresProcessAction" join="join bpm$ProcInstance pi on pi.entity.entityId = {E}.id join pi.procTasks pt">
-                <![CDATA[pt.procActor.user.id = :session$userId and pt.endDate is null]]>
-            </custom>
         </filter>
         <groupTable id="approvalsTable"
                     multiselect="true"

@@ -96,10 +96,11 @@ public class ProcessEmailServiceBean implements ProcessEmailService {
             String entityName = procInstance.getEntityName();
             Object entityId = procInstance.getEntity().getObjectEntityId();
 
-            MetaClass metaClass = metadata.getClassNN(entityName);
-            Entity entity = em.find(metaClass.getJavaClass(), entityId, View.LOCAL);
+            Class<Entity> clazz = metadata.getClassNN(entityName).getJavaClass();
+            Entity result = em.find(clazz, entityId, View.LOCAL);
+
             tx.commit();
-            return entity;
+            return result;
         }
     }
 
